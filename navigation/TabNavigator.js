@@ -1,15 +1,19 @@
 import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+
 import { Ionicons } from '@expo/vector-icons';
 import {colors} from '../theme/colors';
 
 import { MainStackNavigator, FavoritesStackNavigator } from './StackNavigator';
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
+
 
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
+    shifting={true}
+    // barStyle={{ backgroundColor: colors.primary }}
     screenOptions={({ route }) => ({
       tabBarIcon: ({ focused, color, size }) => {
         let iconName;
@@ -22,17 +26,19 @@ const BottomTabNavigator = () => {
         // You can return any component that you like here!
         return <Ionicons  name={iconName} size={size} color={color} />;
       },
+      tabBarColor: route.name === 'Meals'? colors.primary : 'black'
+      
     })}
-    tabBarOptions={{
-      activeTintColor:  '#fff',
-      inactiveTintColor: 'gray',
-      tabStyle:{
-        backgroundColor:colors.primary,
-      },
-      style:{
-        height:70
-      }
-    }}
+    // tabBarOptions={{
+    //   activeTintColor:  '#fff',
+    //   inactiveTintColor: 'gray',
+    //   tabStyle:{
+    //     backgroundColor:colors.primary,
+    //   },
+    //   style:{
+    //     height:70
+    //   }
+    // }}
     >
       <Tab.Screen
         name='Meals'
