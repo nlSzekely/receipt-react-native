@@ -1,21 +1,39 @@
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import * as Font from 'expo-font';
+import {LogBox } from 'react-native';
+
+import AppLoading from 'expo-app-loading';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+LogBox.ignoreLogs(['Remote debugger','Reanimated 2']);
+import DrawerNavigator from './navigation/DrawerNavigator';
 
-export default function App() {
+const App = () => {
+  const [fontLoaded, setFontLoaded] = useState(null);
+
+  useEffect(() => {
+    const fetchFont = async () => {
+      await Font.loadAsync({
+        'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
+        'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+      });
+      setFontLoaded(true);
+    };
+    fetchFont();
+  }, []);
+
+  
+  if (!fontLoaded) {
+    return <AppLoading />;
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+     <StatusBar style='auto' />
+      <DrawerNavigator />
+    </NavigationContainer>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
+
