@@ -24,21 +24,11 @@ const BottomTabNavigator = () => {
         }
 
         // You can return any component that you like here!
-        return <Ionicons  name={iconName} size={size} color={color} />;
+        return <Ionicons  name={iconName} size={20} color={color} />;
       },
       tabBarColor: route.name === 'Meals'? colors.primary : 'black'
       
     })}
-    // tabBarOptions={{
-    //   activeTintColor:  '#fff',
-    //   inactiveTintColor: 'gray',
-    //   tabStyle:{
-    //     backgroundColor:colors.primary,
-    //   },
-    //   style:{
-    //     height:70
-    //   }
-    // }}
     >
       <Tab.Screen
         name='Meals'
